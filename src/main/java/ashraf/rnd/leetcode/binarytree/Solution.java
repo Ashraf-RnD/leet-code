@@ -30,19 +30,18 @@ public class Solution {
     }
 
     public static List<String> binaryTreePaths(TreeNode root) {
-        List<String> lis = new ArrayList<>();
-        dfs(root, lis, "");
-//        for(int i = 0; i < lis.size(); i++)
-//            lis.set(i, lis.get(i).substring(2));
-        return lis;
+        List<String> pathList = new ArrayList<>();
+        dfs(root, pathList, "");
+        pathList.replaceAll(s -> s.substring(2));
+        return pathList;
     }
-    public static void dfs(TreeNode node, List<String> lis, String s){
+    public static void dfs(TreeNode node, List<String> pathList, String path){
         if(node == null) return;
         if(node.left == null && node.right == null)
-            lis.add(s + "->" + node.val);
-        s += "->" + node.val;
-        dfs(node.left, lis, s);
-        dfs(node.right, lis, s);
+            pathList.add(path + "->" + node.val);
+        path += "->" + node.val;
+        dfs(node.left, pathList, path);
+        dfs(node.right, pathList, path);
 
     }
 
