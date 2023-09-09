@@ -20,4 +20,5 @@
 3. Binary Tree Postorder Traversal
 4. Invert Binary Tree
 5. [257] Binary Tree Paths
-6. N-ary Tree Postorder Traversal [Need more understanding]
+6. [617] Merge Two Binary Trees
+7. N-ary Tree Postorder Traversal [Need more understanding]

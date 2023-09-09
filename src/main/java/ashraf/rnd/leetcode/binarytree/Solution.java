@@ -24,6 +24,9 @@ public class Solution {
         var postorderList = postorderTraversal(tree, new ArrayList<>());
         System.out.println("postorderList = " + postorderList);
 
+        var invertedTree = invertTree(tree);
+        System.out.println("invertedTree = " + preorderTraversal(invertedTree, new ArrayList<>()));
+
         var pathList = binaryTreePaths(tree);
         System.out.println("pathList = " + pathList);
 
@@ -35,9 +38,10 @@ public class Solution {
         pathList.replaceAll(s -> s.substring(2));
         return pathList;
     }
-    public static void dfs(TreeNode node, List<String> pathList, String path){
-        if(node == null) return;
-        if(node.left == null && node.right == null)
+
+    public static void dfs(TreeNode node, List<String> pathList, String path) {
+        if (node == null) return;
+        if (node.left == null && node.right == null)
             pathList.add(path + "->" + node.val);
         path += "->" + node.val;
         dfs(node.left, pathList, path);
@@ -48,8 +52,8 @@ public class Solution {
     public static TreeNode invertTree(TreeNode root) {
         if (root != null) {
             var node = root.left;
-            root.left=root.right;
-            root.right=node;
+            root.left = root.right;
+            root.right = node;
             invertTree(root.left);
             invertTree(root.right);
         }
@@ -83,6 +87,21 @@ public class Solution {
             numberList.add(root.val);
         }
         return numberList;
+    }
+
+    //merge binary trees
+
+    public static TreeNode mergeTrees(TreeNode tree1, TreeNode tree2) {
+        if (tree1 == null) {
+            return tree2;
+        } else if (tree2 == null) {
+            return tree1;
+        } else {
+            tree1.val += tree2.val;
+            tree1.left=mergeTrees(tree1.left,tree2.left);
+            tree1.right=mergeTrees(tree1.right,tree2.right);
+            return tree1;
+        }
     }
 
 }
