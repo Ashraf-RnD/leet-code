@@ -30,23 +30,19 @@ public class Solution {
         System.out.println("pathList = " + pathList);
 
         Set<TreeNode> boundaryList = doBoundaryTraverse(tree);
-        new ArrayList<>(boundaryList).forEach(node -> System.out.println("Boundary = " + node.val));
+        boundaryList.forEach(node -> System.out.println("Boundary = " + node.val));
 
     }
 
     private static Set<TreeNode> doBoundaryTraverse(TreeNode tree) {
-        var leftBoundary = getLeftBoundaryNodeList(tree, new LinkedList<>());
-        Set<TreeNode> boundaryList = new LinkedHashSet<>(leftBoundary);//to maintain order LinkedHashSet
+        var boundary = getLeftBoundaryNodeList(tree, new LinkedHashSet<>());//to maintain order LinkedHashSet
 
-        var nodeList = getLeafNodeList(tree, new LinkedList<>());
-        boundaryList.addAll(nodeList);
+        getLeafNodeList(tree, boundary);
 
-        var rightBoundary = getRightBoundaryNodeList(tree, new LinkedList<>());
-        boundaryList.addAll(rightBoundary);
-        return boundaryList;
+        return getRightBoundaryNodeList(tree, boundary);
     }
 
-    public static List<TreeNode> getRightBoundaryNodeList(TreeNode root, List<TreeNode> nodeList){
+    public static Set<TreeNode> getRightBoundaryNodeList(TreeNode root, Set<TreeNode> nodeList){
         if (root==null){
             return nodeList;
         } else if (root.right == null) {
@@ -57,7 +53,7 @@ public class Solution {
             return getRightBoundaryNodeList(root.right,nodeList);
         }
     }
-    public static List<TreeNode> getLeftBoundaryNodeList(TreeNode root, List<TreeNode> nodeList){
+    public static Set<TreeNode> getLeftBoundaryNodeList(TreeNode root, Set<TreeNode> nodeList){
         if (root==null){
             return nodeList;
         } else if (root.left == null) {
@@ -69,7 +65,7 @@ public class Solution {
         }
     }
 
-    public static List<TreeNode> getLeafNodeList(TreeNode root, List<TreeNode> nodeList){
+    public static Set<TreeNode> getLeafNodeList(TreeNode root, Set<TreeNode> nodeList){
         if (root==null){
             return nodeList;
         } else if (root.left==null && root.right==null) {
