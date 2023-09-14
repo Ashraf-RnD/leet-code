@@ -26,9 +26,6 @@ public class Solution {
         var invertedTree = invertTree(tree);
         System.out.println("invertedTree = " + preorderTraversal(invertedTree, new ArrayList<>()));
 
-        var pathList = binaryTreePaths(tree);
-        System.out.println("pathList = " + pathList);
-
         Set<TreeNode> boundaryList = doBoundaryTraverse(tree);
         boundaryList.forEach(node -> System.out.println("Boundary = " + node.val));
 
@@ -77,22 +74,7 @@ public class Solution {
         return nodeList;
     }
 
-    public static List<String> binaryTreePaths(TreeNode root) {
-        List<String> pathList = new ArrayList<>();
-        dfs(root, pathList, "");
-        pathList.replaceAll(s -> s.substring(2));
-        return pathList;
-    }
 
-    public static void dfs(TreeNode node, List<String> pathList, String path) {
-        if (node == null) return;
-        if (node.left == null && node.right == null)
-            pathList.add(path + "->" + node.val);
-        path += "->" + node.val;
-        dfs(node.left, pathList, path);
-        dfs(node.right, pathList, path);
-
-    }
 
     public static TreeNode invertTree(TreeNode root) {
         if (root != null) {
