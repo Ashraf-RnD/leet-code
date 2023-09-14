@@ -1,7 +1,6 @@
 package ashraf.rnd.leetcode.binarytree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Solution {
 
@@ -30,6 +29,56 @@ public class Solution {
         var pathList = binaryTreePaths(tree);
         System.out.println("pathList = " + pathList);
 
+        Set<TreeNode> boundaryList = doBoundaryTraverse(tree);
+        new ArrayList<>(boundaryList).forEach(node -> System.out.println("Boundary = " + node.val));
+
+    }
+
+    private static Set<TreeNode> doBoundaryTraverse(TreeNode tree) {
+        var leftBoundary = getLeftBoundaryNodeList(tree, new LinkedList<>());
+        Set<TreeNode> boundaryList = new LinkedHashSet<>(leftBoundary);//to maintain order LinkedHashSet
+
+        var nodeList = getLeafNodeList(tree, new LinkedList<>());
+        boundaryList.addAll(nodeList);
+
+        var rightBoundary = getRightBoundaryNodeList(tree, new LinkedList<>());
+        boundaryList.addAll(rightBoundary);
+        return boundaryList;
+    }
+
+    public static List<TreeNode> getRightBoundaryNodeList(TreeNode root, List<TreeNode> nodeList){
+        if (root==null){
+            return nodeList;
+        } else if (root.right == null) {
+            nodeList.add(root);
+            return nodeList;
+        }else {
+            nodeList.add(root);
+            return getRightBoundaryNodeList(root.right,nodeList);
+        }
+    }
+    public static List<TreeNode> getLeftBoundaryNodeList(TreeNode root, List<TreeNode> nodeList){
+        if (root==null){
+            return nodeList;
+        } else if (root.left == null) {
+            nodeList.add(root);
+            return nodeList;
+        }else {
+            nodeList.add(root);
+            return getLeftBoundaryNodeList(root.left,nodeList);
+        }
+    }
+
+    public static List<TreeNode> getLeafNodeList(TreeNode root, List<TreeNode> nodeList){
+        if (root==null){
+            return nodeList;
+        } else if (root.left==null && root.right==null) {
+            nodeList.add(root);
+        }else {
+            getLeafNodeList(root.left,nodeList);
+            getLeafNodeList(root.right,nodeList);
+        }
+        return nodeList;
     }
 
     public static List<String> binaryTreePaths(TreeNode root) {
