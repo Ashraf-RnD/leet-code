@@ -1,5 +1,6 @@
 ### February 2025
 1. [70] {Dynamic Programing} Climb Stairs
+2. [202] {Floyd Cycle} Happy Number
 
 ### August 2023
 1. Pascal's Triangle

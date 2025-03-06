@@ -1,4 +1,4 @@
-package ashraf.rnd.leetcode.climbingstairs;
+package ashraf.rnd.dp.climbingstairs;
 
 /**
  * @Date : 6/3/25

@@ -1,4 +1,4 @@
-package ashraf.rnd.leetcode.climbingstairs;
+package ashraf.rnd.dp.climbingstairs;
 
 import lombok.extern.slf4j.Slf4j;
 
